@@ -1,12 +1,28 @@
 import globals from "globals";
-import pluginJs from "@eslint/js";
+import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
-
+import reactRecommended from "eslint-plugin-react/configs/recommended.js";
 
 export default [
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReactConfig,
+  {
+    rules: {
+      "no-unused-vars": "error",
+      "no-console": "error",
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    ...reactRecommended,
+    languageOptions: {
+      ...reactRecommended.languageOptions,
+      globals: {
+        ...globals.serviceworker,
+        ...globals.browser,
+      },
+    },
+  },
+  ...tseslint.config(
+    eslint.configs.recommended,
+    ...tseslint.configs.recommended,
+  ),
 ];
