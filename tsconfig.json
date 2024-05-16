@@ -22,13 +22,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     /* Paths */
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./*"
-      ],
-      "@hooks/*": [
-        "./hooks/*"
+        "./src/*"
       ]
     }
   },
