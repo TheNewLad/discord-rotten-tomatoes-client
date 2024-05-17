@@ -1,5 +1,5 @@
-import { env } from "@/config/environment.js";
-import { createClient } from "@supabase/supabase-js";
+import { env } from "@/config/environment.ts";
+import { createClient, Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);
@@ -18,7 +18,7 @@ async function signOut() {
 }
 
 const getAuthorizationStatus = async () => {
-  let { data: profile } = await supabase
+  const { data: profile } = await supabase
     .from("profile")
     .select("authorized")
     .single();
@@ -26,7 +26,7 @@ const getAuthorizationStatus = async () => {
   return profile?.authorized ?? null;
 };
 
-function handleAuthentication(setSession) {
+function handleAuthentication(setSession: (session: Session | null) => void) {
   supabase.auth.getSession().then(({ data: { session } }) => {
     setSession(session);
   });
@@ -40,7 +40,10 @@ function handleAuthentication(setSession) {
   return () => subscription.unsubscribe();
 }
 
-const handleAuthorization = async (session, setAuthorized) => {
+const handleAuthorization = async (
+  session: Session | null,
+  setAuthorized: (authorized: boolean) => void,
+) => {
   const authorizationStatus = await getAuthorizationStatus();
 
   if (typeof authorizationStatus === "boolean") {
@@ -69,8 +72,8 @@ const handleAuthorization = async (session, setAuthorized) => {
 };
 
 export const useAuth = () => {
-  const [session, setSession] = useState(null);
-  const [authorized, setAuthorized] = useState(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
 
   useEffect(() => {
     return handleAuthentication(setSession);

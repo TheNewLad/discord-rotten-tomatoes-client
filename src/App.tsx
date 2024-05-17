@@ -1,6 +1,6 @@
-import "./index.css";
-import { useAuth } from "@/hooks/useAuth.js";
-import React from "react";
+import "./globals.css";
+import { Home } from "@/components/pages/Home.tsx";
+import { useAuth } from "@/hooks/useAuth.ts";
 
 export default function App() {
   const { signInWithDiscord, signOut, session, authorized } = useAuth();
@@ -10,6 +10,6 @@ export default function App() {
   } else if (authorized === false) {
     return <div>Not authorized</div>;
   } else {
-    return <button onClick={signOut}>Sign out</button>;
+    return <Home />; //<button onClick={signOut}>Sign out</button>;
   }
 }
