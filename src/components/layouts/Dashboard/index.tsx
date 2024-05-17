@@ -1,3 +1,4 @@
+import { classNames } from "@/lib/utils.ts";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -25,15 +26,11 @@ const teams = [
   { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
 ];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-interface Layout {
+interface Props {
   children: React.ReactNode;
 }
 
-export const Layout = ({ children }: Layout) => {
+export const Dashboard = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (

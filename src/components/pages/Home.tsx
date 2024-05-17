@@ -1,10 +1,10 @@
-import { Layout } from "@/components/Layout.tsx";
+import { Dashboard } from "@/components/layouts/Dashboard";
 
 export const Home = () => {
   return (
-    <Layout>
+    <Dashboard>
       <h1 className="text-2xl font-bold">Home</h1>
       <p className="mt-4">Welcome to the Home page!</p>
-    </Layout>
+    </Dashboard>
   );
 };
