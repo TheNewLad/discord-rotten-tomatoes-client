@@ -1,8 +1,7 @@
 import { env } from "@/config/environment.ts";
-import { createClient, Session } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase.ts";
+import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-
-const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_KEY);
 
 async function signInWithDiscord() {
   await supabase.auth.signInWithOAuth({

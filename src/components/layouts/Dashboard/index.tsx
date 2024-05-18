@@ -1,4 +1,5 @@
-import { classNames } from "@/lib/utils.ts";
+import { UserContext } from "@/context/UserContext.ts";
+import { cn } from "@/lib/utils.ts";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -10,7 +11,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -27,6 +28,7 @@ interface Props {
 
 export const Dashboard = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const user = useContext(UserContext);
 
   return (
     <>
@@ -40,7 +42,7 @@ export const Dashboard = ({ children }: Props) => {
       */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
+          <Dialog className="relative z-40 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
@@ -104,7 +106,7 @@ export const Dashboard = ({ children }: Props) => {
                               <li key={item.name}>
                                 <a
                                   href={item.href}
-                                  className={classNames(
+                                  className={cn(
                                     item.current
                                       ? "bg-gray-800 text-white"
                                       : "text-gray-400 hover:bg-gray-800 hover:text-white",
@@ -131,7 +133,7 @@ export const Dashboard = ({ children }: Props) => {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
             <div className="flex h-16 shrink-0 items-center">
@@ -149,7 +151,7 @@ export const Dashboard = ({ children }: Props) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className={classNames(
+                          className={cn(
                             item.current
                               ? "bg-gray-800 text-white"
                               : "text-gray-400 hover:bg-gray-800 hover:text-white",
@@ -173,11 +175,13 @@ export const Dashboard = ({ children }: Props) => {
                   >
                     <img
                       className="h-8 w-8 rounded-full bg-gray-800"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={user?.user_metadata.avatar_url}
                       alt=""
                     />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
+                    <span aria-hidden="true">
+                      {`@${user?.user_metadata.full_name}`}
+                    </span>
                   </a>
                 </li>
               </ul>
@@ -201,7 +205,7 @@ export const Dashboard = ({ children }: Props) => {
             <span className="sr-only">Your profile</span>
             <img
               className="h-8 w-8 rounded-full bg-gray-800"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src={user?.user_metadata.avatar_url}
               alt=""
             />
           </a>

@@ -1,15 +1,11 @@
+import forms from "@tailwindcss/forms";
 import animate from "tailwindcss-animate";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -79,5 +75,5 @@ export default {
       },
     },
   },
-  plugins: [animate],
+  plugins: [animate, forms],
 };
