@@ -1,11 +1,7 @@
 import { Dashboard } from "@/components/layouts/Dashboard";
 import { Onboarding } from "@/components/ui/Onboarding.tsx";
 
-interface Props {
-  onboarding: boolean;
-}
-
-export const Home = ({ onboarding }: Props) => {
+export const Home = () => {
   return (
     <Dashboard>
       <h1 className="text-2xl font-bold">Home</h1>

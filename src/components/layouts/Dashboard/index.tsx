@@ -29,6 +29,7 @@ interface Props {
 export const Dashboard = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const user = useContext(UserContext);
+  // todo: handle routing here and check if user has onboarded
 
   return (
     <>

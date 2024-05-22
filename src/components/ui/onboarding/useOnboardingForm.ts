@@ -1,13 +1,12 @@
 import { onboardingSchema } from "@/components/ui/onboarding/onboardingSchema.ts";
 import { UserContext } from "@/context/UserContext.ts";
-import { supabase } from "@/lib/supabase.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 interface OnboardingPayload {
-  discordId: string;
+  supabaseUserId: string;
   reviewWeights: {
     plot: number;
     acting: number;
@@ -34,27 +33,18 @@ export const useOnboardingForm = () => {
   const onSubmit = (data: z.infer<typeof onboardingSchema>) => {
     if (!user) return;
     onboardUser({
-      discordId: user?.user_metadata.provider_id,
+      supabaseUserId: user?.id,
       reviewWeights: data,
     });
   };
 
   const onboardUser = async ({
-    discordId,
+    supabaseUserId,
     reviewWeights,
   }: OnboardingPayload) => {
     // Send the data to the server
     // Once that passes then we can let Supabase know that the user has completed onboarding
-    console.log({ discordId, reviewWeights });
-
-    const { data: updatedUser } = await supabase
-      .from("profile")
-      .update({ onboarded: true })
-      .eq("user_id", user?.id)
-      .select("onboarded")
-      .single();
-
-    console.log(updatedUser);
+    console.log({ supabaseUserId, reviewWeights });
   };
 
   return {
