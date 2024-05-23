@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Home } from "@/components/pages/Home.tsx";
-import { UserContext } from "@/context/UserContext.ts";
+import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
 import { useAuthorization } from "@/hooks/useAuthorization.ts";
 import { useSupabaseSession } from "@/hooks/useSupabaseSession.ts";
 import { signInWithDiscord } from "@/lib/supabase.ts";
@@ -21,9 +21,9 @@ export default function App() {
     return <div>Not authorized</div>;
   } else {
     return (
-      <UserContext.Provider value={session.user}>
-        <Home onboarding={true} />
-      </UserContext.Provider>
+      <SupabaseUserContext.Provider value={session.user}>
+        <Home />
+      </SupabaseUserContext.Provider>
     );
   }
 }

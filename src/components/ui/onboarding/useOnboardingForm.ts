@@ -1,5 +1,5 @@
 import { onboardingSchema } from "@/components/ui/onboarding/onboardingSchema.ts";
-import { UserContext } from "@/context/UserContext.ts";
+import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -17,7 +17,7 @@ interface OnboardingPayload {
 }
 
 export const useOnboardingForm = () => {
-  const user = useContext(UserContext);
+  const user = useContext(SupabaseUserContext);
 
   const form = useForm<z.infer<typeof onboardingSchema>>({
     resolver: zodResolver(onboardingSchema),

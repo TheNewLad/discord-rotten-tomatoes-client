@@ -1,4 +1,4 @@
-import { UserContext } from "@/context/UserContext.ts";
+import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
 import { cn } from "@/lib/utils.ts";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -28,7 +28,7 @@ interface Props {
 
 export const Dashboard = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const user = useContext(UserContext);
+  const user = useContext(SupabaseUserContext);
   // todo: handle routing here and check if user has onboarded
 
   return (
