@@ -1,4 +1,6 @@
 import { OnboardingForm } from "@/components/ui/onboarding/OnboardingForm.tsx";
+import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
+import { useOnboarding } from "@/hooks/api/useOnboarding.ts";
 import {
   Dialog,
   DialogPanel,
@@ -7,14 +9,22 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 
 export const Onboarding = () => {
-  const [open, setOpen] = useState(true);
+  const supabaseUser = useContext(SupabaseUserContext);
+
+  const { data, isLoading } = useOnboarding({
+    discordUserId: supabaseUser?.user_metadata.provider_id,
+  });
+
+  const [open, setOpen] = useState(!data?.onboarded);
 
   const cancelButtonRef = useRef(null);
 
-  return (
+  const showOnboarding = !isLoading && !data?.onboarded;
+
+  return showOnboarding ? (
     <Transition show={open} as={Fragment}>
       <Dialog
         className="relative z-50"
@@ -64,8 +74,11 @@ export const Onboarding = () => {
                         Add your review weights to get started. This will orient
                         review scores to your preferences.
                       </p>
+                      <p className="mt-1 text-sm italic text-gray-500">
+                        Each weight should be a number between 0 and 10.
+                      </p>
                     </div>
-                    <OnboardingForm />
+                    <OnboardingForm onSubmit={() => setOpen(false)} />
                   </div>
                 </div>
               </DialogPanel>
@@ -74,5 +87,5 @@ export const Onboarding = () => {
         </div>
       </Dialog>
     </Transition>
-  );
+  ) : null;
 };

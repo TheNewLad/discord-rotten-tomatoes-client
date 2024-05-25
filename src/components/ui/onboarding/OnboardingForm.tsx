@@ -25,7 +25,13 @@ const inputs: { name: keyof OnboardingSchema; label: string }[] = [
   { name: "pacing", label: "Pacing" },
 ];
 
-export const OnboardingForm = () => {
+interface OnboardingFormProps {
+  onSubmit: () => void;
+}
+
+export const OnboardingForm = ({
+  onSubmit: onSubmitCallback,
+}: OnboardingFormProps) => {
   const { form, onSubmit } = useOnboardingForm();
 
   return (
@@ -55,7 +61,11 @@ export const OnboardingForm = () => {
             )}
           />
         ))}
-        <Button type="submit" disabled={!form.formState.isValid}>
+        <Button
+          type="submit"
+          disabled={!form.formState.isValid}
+          onClick={() => onSubmitCallback()}
+        >
           Submit
         </Button>
       </form>

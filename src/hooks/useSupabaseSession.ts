@@ -18,6 +18,5 @@ export const useSupabaseSession = () => {
 
     return () => subscription.unsubscribe();
   }, []);
-
   return session;
 };
