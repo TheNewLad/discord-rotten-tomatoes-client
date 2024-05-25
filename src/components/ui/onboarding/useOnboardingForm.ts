@@ -1,15 +1,13 @@
 import { onboardingSchema } from "@/components/ui/onboarding/onboardingSchema.ts";
-import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
 import { useOnboarding } from "@/hooks/api/useOnboarding.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const useOnboardingForm = () => {
-  const user = useContext(SupabaseUserContext);
+  const authenticatedUser = null;
   const { onboardUser } = useOnboarding({
-    discordUserId: user?.user_metadata.provider_id,
+    discordUserId: authenticatedUser?.user_metadata.provider_id,
   });
 
   const form = useForm<z.infer<typeof onboardingSchema>>({

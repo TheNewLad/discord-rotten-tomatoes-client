@@ -1,5 +1,4 @@
 import { OnboardingForm } from "@/components/ui/onboarding/OnboardingForm.tsx";
-import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
 import { useOnboarding } from "@/hooks/api/useOnboarding.ts";
 import {
   Dialog,
@@ -9,13 +8,13 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { Fragment, useContext, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 
 export const Onboarding = () => {
-  const supabaseUser = useContext(SupabaseUserContext);
+  const authenticatedUser = null;
 
   const { data, isLoading } = useOnboarding({
-    discordUserId: supabaseUser?.user_metadata.provider_id,
+    discordUserId: authenticatedUser?.user_metadata.provider_id,
   });
 
   const [open, setOpen] = useState(!data?.onboarded);

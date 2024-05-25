@@ -1,4 +1,3 @@
-import { SupabaseUserContext } from "@/context/SupabaseUserContext.ts";
 import { cn } from "@/lib/utils.ts";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -11,7 +10,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useState } from "react";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -28,7 +27,7 @@ interface Props {
 
 export const Dashboard = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const user = useContext(SupabaseUserContext);
+  const user = null;
   // todo: handle routing here and check if user has onboarded
 
   return (

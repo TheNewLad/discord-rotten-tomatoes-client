@@ -3,14 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 
 interface Props {
   discordToken?: string | null;
-  supabaseUserId?: string;
+  authenticatedUserId?: string;
 }
 
-export const useAuthorization = ({ discordToken, supabaseUserId }: Props) => {
+export const useAuthorization = ({
+  discordToken,
+  authenticatedUserId,
+}: Props) => {
   const { data, isError, error, isPending } = useQuery({
-    queryKey: ["authorize", discordToken, supabaseUserId],
-    queryFn: async () => authorizeUser({ discordToken, supabaseUserId }),
-    enabled: !!supabaseUserId,
+    queryKey: ["authorize", discordToken, authenticatedUserId],
+    queryFn: async () => authorizeUser({ discordToken, authenticatedUserId }),
+    enabled: !!authenticatedUserId,
   });
 
   return {
@@ -21,9 +24,9 @@ export const useAuthorization = ({ discordToken, supabaseUserId }: Props) => {
   };
 };
 
-const authorizeUser = async ({ discordToken, supabaseUserId }: Props) => {
-  if (!supabaseUserId) {
-    throw new Error("Missing supabaseUserId");
+const authorizeUser = async ({ discordToken, authenticatedUserId }: Props) => {
+  if (!authenticatedUserId) {
+    throw new Error("Missing authenticatedUserId");
   }
 
   const res = await fetch(endpoints.AUTHORIZE_USER, {
@@ -32,7 +35,7 @@ const authorizeUser = async ({ discordToken, supabaseUserId }: Props) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${discordToken}`,
     },
-    body: JSON.stringify({ supabaseUserId }),
+    body: JSON.stringify({ authenticatedUserId }),
   });
 
   return res.json();
