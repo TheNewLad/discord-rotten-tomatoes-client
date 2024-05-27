@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils.ts";
+import { useAuth, UserButton, useUser } from "@clerk/clerk-react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -10,7 +11,8 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -21,13 +23,23 @@ const navigation = [
   { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
 ];
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const Dashboard = ({ children }: Props) => {
+export const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const user = null;
+
+  const {
+    sessionId,
+    isLoaded: isSessionLoaded,
+    isSignedIn,
+    userId,
+  } = useAuth();
+  const { user } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if ((isSessionLoaded && !userId) || !isSignedIn) {
+      navigate("/sign-in");
+    }
+  }, [isSessionLoaded]);
   // todo: handle routing here and check if user has onboarded
 
   return (
@@ -169,20 +181,11 @@ export const Dashboard = ({ children }: Props) => {
                   </ul>
                 </li>
                 <li className="-mx-6 mt-auto">
-                  <a
-                    href="#"
-                    className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
-                  >
-                    <img
-                      className="h-8 w-8 rounded-full bg-gray-800"
-                      src={user?.user_metadata.avatar_url}
-                      alt=""
-                    />
+                  <div className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
+                    <UserButton />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">
-                      {`@${user?.user_metadata.full_name}`}
-                    </span>
-                  </a>
+                    <span aria-hidden="true">{`@${user?.username}`}</span>
+                  </div>
                 </li>
               </ul>
             </nav>
@@ -205,14 +208,16 @@ export const Dashboard = ({ children }: Props) => {
             <span className="sr-only">Your profile</span>
             <img
               className="h-8 w-8 rounded-full bg-gray-800"
-              src={user?.user_metadata.avatar_url}
+              src={user?.imageUrl}
               alt=""
             />
           </a>
         </div>
 
         <main className="py-10 lg:pl-72">
-          <div className="px-4 sm:px-6 lg:px-8">{children}</div>
+          <div className="px-4 sm:px-6 lg:px-8">
+            <Outlet />
+          </div>
         </main>
       </div>
     </>
