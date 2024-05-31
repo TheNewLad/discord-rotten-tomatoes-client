@@ -1,6 +1,7 @@
 import { Dashboard } from "@/components/layouts/Dashboard";
+import { SignIn } from "@/components/pages/SignIn.tsx";
 import { env } from "@/config/environment.ts";
-import { ClerkProvider, SignIn } from "@clerk/clerk-react";
+import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";

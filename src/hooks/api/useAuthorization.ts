@@ -2,18 +2,16 @@ import { endpoints } from "@/config/endpoints.ts";
 import { useQuery } from "@tanstack/react-query";
 
 interface Props {
-  discordToken?: string | null;
-  authenticatedUserId?: string;
+  clerkSessionId?: string;
 }
 
-export const useAuthorization = ({
-  discordToken,
-  authenticatedUserId,
-}: Props) => {
+export const useAuthorization = ({ clerkSessionId }: Props) => {
+  const 
+
   const { data, isError, error, isPending } = useQuery({
-    queryKey: ["authorize", discordToken, authenticatedUserId],
-    queryFn: async () => authorizeUser({ discordToken, authenticatedUserId }),
-    enabled: !!authenticatedUserId,
+    queryKey: ["authorize", clerkSessionId],
+    queryFn: async () => authorizeUser({ clerkSessionId }),
+    enabled: !!clerkSessionId,
   });
 
   return {
@@ -24,18 +22,17 @@ export const useAuthorization = ({
   };
 };
 
-const authorizeUser = async ({ discordToken, authenticatedUserId }: Props) => {
-  if (!authenticatedUserId) {
+const authorizeUser = async ({ clerkSessionId }: Props) => {
+  if (!clerkSessionId) {
     throw new Error("Missing authenticatedUserId");
   }
 
   const res = await fetch(endpoints.AUTHORIZE_USER, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${discordToken}`,
+      Authorization: `Bearer ${clerkSessionId}`,
     },
-    body: JSON.stringify({ authenticatedUserId }),
   });
 
   return res.json();
