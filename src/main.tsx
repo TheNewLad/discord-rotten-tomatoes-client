@@ -1,6 +1,8 @@
-import { Dashboard } from "@/components/layouts/Dashboard";
-import { SignIn } from "@/components/pages/SignIn.tsx";
 import { env } from "@/config/environment.ts";
+import { routes } from "@/config/routes.ts";
+import { OauthAuthorizePage } from "@/pages/oauth-authorize.page.tsx";
+import { SignInPage } from "@/pages/sign-in.page.tsx";
+import { Unauthorized403Page } from "@/pages/unauthorized-403.page.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -17,8 +19,8 @@ if (!env.CLERK_PUBLISHABLE_KEY) {
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Dashboard />,
+    path: routes.HOME,
+    element: <div />,
     children: [
       {
         index: true,
@@ -27,8 +29,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/sign-in",
-    element: <SignIn />,
+    path: routes.SIGN_IN,
+    element: <SignInPage />,
+  },
+  {
+    path: routes.OAUTH_AUTHORIZE,
+    element: <OauthAuthorizePage />,
+  },
+  {
+    path: routes.ERROR.UNAUTHORIZED,
+    element: <Unauthorized403Page />,
   },
 ]);
 
