@@ -1,8 +1,12 @@
 const errorBasePath = "/error";
+const dashboardBasePath = "/dashboard";
 
 /* eslint sort-keys:"error" */
 export const routes = {
-  DASHBOARD: "/dashboard",
+  DASHBOARD: {
+    HOME: dashboardBasePath,
+    REVIEWS: `${dashboardBasePath}/reviews`,
+  },
   ERROR: {
     UNAUTHORIZED: `${errorBasePath}/403`,
   },

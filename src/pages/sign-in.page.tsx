@@ -1,4 +1,4 @@
-import { Button } from "@/components/button.tsx";
+import { Button } from "@/components/elements/button.tsx";
 import { DiscordIcon } from "@/components/icons/discord.icon.tsx";
 import { routes } from "@/config/routes.ts";
 import { SignInButton } from "@clerk/clerk-react";
