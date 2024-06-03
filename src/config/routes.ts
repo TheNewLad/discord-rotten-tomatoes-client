@@ -1,16 +1,33 @@
-const errorBasePath = "/error";
-const dashboardBasePath = "/dashboard";
-
 /* eslint sort-keys:"error" */
-export const routes = {
-  DASHBOARD: {
-    HOME: dashboardBasePath,
-    REVIEWS: `${dashboardBasePath}/reviews`,
-  },
-  ERROR: {
-    UNAUTHORIZED: `${errorBasePath}/403`,
-  },
+const BASE_PATHS = {
+  DASHBOARD: "/dashboard",
+  ERROR: "/errors",
   HOME: "/",
   OAUTH_AUTHORIZE: "/oauth/authorize",
   SIGN_IN: "/sign-in",
+};
+
+const PROFILE_ROUTES = {
+  HOME: `${BASE_PATHS.DASHBOARD}/@me`,
+  ONBOARD_USER: `${BASE_PATHS.DASHBOARD}/@me/onboard`,
+  SETTINGS: `${BASE_PATHS.DASHBOARD}/@me/settings`,
+};
+
+const DASHBOARD_ROUTES = {
+  HOME: BASE_PATHS.DASHBOARD,
+  PROFILE: PROFILE_ROUTES,
+  REVIEWS: `${BASE_PATHS.DASHBOARD}/reviews`,
+};
+
+const ERROR_ROUTES = {
+  NOT_FOUND: `${BASE_PATHS.ERROR}/404`,
+  UNAUTHORIZED: `${BASE_PATHS.ERROR}/403`,
+};
+
+export const ROUTES = {
+  DASHBOARD: DASHBOARD_ROUTES,
+  ERROR: ERROR_ROUTES,
+  HOME: BASE_PATHS.HOME,
+  OAUTH_AUTHORIZE: BASE_PATHS.OAUTH_AUTHORIZE,
+  SIGN_IN: BASE_PATHS.SIGN_IN,
 };

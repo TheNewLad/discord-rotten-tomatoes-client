@@ -1,5 +1,5 @@
 import { useOauthAuthorization } from "@/api/useOauthAuthorization.ts";
-import { routes } from "@/config/routes.ts";
+import { ROUTES } from "@/config/routes.ts";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,11 +19,11 @@ export const OauthAuthorizePage = () => {
   useEffect(() => {
     if (!isLoading) {
       if (error) {
-        navigate(routes.ERROR.UNAUTHORIZED);
+        navigate(ROUTES.ERROR.UNAUTHORIZED);
       } else {
         !data.authorized
-          ? navigate(routes.HOME)
-          : navigate(routes.ERROR.UNAUTHORIZED);
+          ? navigate(ROUTES.HOME)
+          : navigate(ROUTES.ERROR.UNAUTHORIZED);
       }
     }
   }, [data]);

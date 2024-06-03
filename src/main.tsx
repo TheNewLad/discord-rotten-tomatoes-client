@@ -1,7 +1,9 @@
 import { env } from "@/config/environment.ts";
-import { routes } from "@/config/routes.ts";
+import { ROUTES } from "@/config/routes.ts";
 import { DashboardLayout } from "@/layouts/dashboard.layout.tsx";
+import { NotFound404Page } from "@/pages/not-found-404.page.tsx";
 import { OauthAuthorizePage } from "@/pages/oauth-authorize.page.tsx";
+import { OnboardUserPage } from "@/pages/onboard-user.page.tsx";
 import { SignInPage } from "@/pages/sign-in.page.tsx";
 import { Unauthorized403Page } from "@/pages/unauthorized-403.page.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
@@ -23,9 +25,9 @@ if (!env.CLERK_PUBLISHABLE_KEY) {
 }
 
 const router = createBrowserRouter([
-  { path: routes.HOME, element: <Navigate to={routes.DASHBOARD} replace /> },
+  { path: ROUTES.HOME, element: <Navigate to={ROUTES.DASHBOARD} replace /> },
   {
-    path: routes.DASHBOARD.HOME,
+    path: ROUTES.DASHBOARD.HOME,
     element: <DashboardLayout />,
     children: [
       {
@@ -33,22 +35,50 @@ const router = createBrowserRouter([
         element: <div>Home</div>,
       },
       {
-        path: routes.DASHBOARD.REVIEWS,
+        path: ROUTES.DASHBOARD.REVIEWS,
         element: <div>Reviews</div>,
+      },
+      {
+        path: ROUTES.DASHBOARD.PROFILE.HOME,
+        element: <div>Profile</div>,
+      },
+      {
+        path: ROUTES.DASHBOARD.PROFILE.ONBOARD_USER,
+        element: <OnboardUserPage />,
+      },
+      {
+        path: ROUTES.DASHBOARD.PROFILE.SETTINGS,
+        element: <div>Settings</div>,
+      },
+      {
+        path: "*",
+        element: <Navigate to={ROUTES.ERROR.NOT_FOUND} />,
+      },
+      {
+        path: "*",
+        element: <Navigate to={ROUTES.ERROR.NOT_FOUND} />,
       },
     ],
   },
   {
-    path: routes.SIGN_IN,
+    path: ROUTES.SIGN_IN,
     element: <SignInPage />,
   },
   {
-    path: routes.OAUTH_AUTHORIZE,
+    path: ROUTES.OAUTH_AUTHORIZE,
     element: <OauthAuthorizePage />,
   },
   {
-    path: routes.ERROR.UNAUTHORIZED,
+    path: ROUTES.ERROR.UNAUTHORIZED,
     element: <Unauthorized403Page />,
+  },
+  {
+    path: ROUTES.ERROR.NOT_FOUND,
+    element: <NotFound404Page />,
+  },
+  {
+    path: "*",
+    element: <Navigate to={ROUTES.ERROR.NOT_FOUND} />,
   },
 ]);
 

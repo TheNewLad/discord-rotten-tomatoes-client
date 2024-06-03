@@ -1,6 +1,5 @@
-import { Button } from "@/components/elements/button.tsx";
 import { DiscordIcon } from "@/components/icons/discord.icon.tsx";
-import { routes } from "@/config/routes.ts";
+import { ROUTES } from "@/config/routes.ts";
 import { SignInButton } from "@clerk/clerk-react";
 
 export const SignInPage = () => {
@@ -19,11 +18,11 @@ export const SignInPage = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="flex justify-center">
-          <SignInButton forceRedirectUrl={routes.OAUTH_AUTHORIZE}>
-            <Button color="indigo" className="flex max-w-64 flex-1">
+          <SignInButton forceRedirectUrl={ROUTES.OAUTH_AUTHORIZE}>
+            <button className="flex w-full justify-center gap-4 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               <DiscordIcon />
               Sign in
-            </Button>
+            </button>
           </SignInButton>
         </div>
       </div>
