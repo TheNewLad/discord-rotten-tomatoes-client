@@ -5,6 +5,7 @@ import { NotFound404Page } from "@/pages/not-found-404.page.tsx";
 import { OauthAuthorizePage } from "@/pages/oauth-authorize.page.tsx";
 import { OnboardUserPage } from "@/pages/onboard-user.page.tsx";
 import { SignInPage } from "@/pages/sign-in.page.tsx";
+import { SignedOutPage } from "@/pages/signed-out.page.tsx";
 import { Unauthorized403Page } from "@/pages/unauthorized-403.page.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -25,7 +26,10 @@ if (!env.CLERK_PUBLISHABLE_KEY) {
 }
 
 const router = createBrowserRouter([
-  { path: ROUTES.HOME, element: <Navigate to={ROUTES.DASHBOARD} replace /> },
+  {
+    path: ROUTES.HOME,
+    element: <Navigate to={ROUTES.DASHBOARD.HOME} replace />,
+  },
   {
     path: ROUTES.DASHBOARD.HOME,
     element: <DashboardLayout />,
@@ -50,19 +54,15 @@ const router = createBrowserRouter([
         path: ROUTES.DASHBOARD.PROFILE.SETTINGS,
         element: <div>Settings</div>,
       },
-      {
-        path: "*",
-        element: <Navigate to={ROUTES.ERROR.NOT_FOUND} />,
-      },
-      {
-        path: "*",
-        element: <Navigate to={ROUTES.ERROR.NOT_FOUND} />,
-      },
     ],
   },
   {
     path: ROUTES.SIGN_IN,
     element: <SignInPage />,
+  },
+  {
+    path: ROUTES.SIGNED_OUT,
+    element: <SignedOutPage />,
   },
   {
     path: ROUTES.OAUTH_AUTHORIZE,

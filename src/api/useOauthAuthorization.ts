@@ -1,19 +1,27 @@
 import { endpoints } from "@/config/endpoints.ts";
-import { useSession } from "@clerk/clerk-react";
+import { FetchError } from "@/lib/errors.ts";
+import { useAuth } from "@clerk/clerk-react";
 import { useQuery } from "@tanstack/react-query";
 
 export const useOauthAuthorization = () => {
-  const { session } = useSession();
-  const { isLoading, data, error } = useQuery({
-    queryKey: ["oauth_authorize"],
-    queryFn: async () =>
-      fetch(endpoints.AUTHORIZE_USER, {
+  const { getToken } = useAuth();
+  const { isLoading, data, error } = useQuery<unknown, FetchError>({
+    queryKey: ["oauth_validate"],
+    queryFn: async () => {
+      const response = await fetch(endpoints.VALIDATE_USER, {
         headers: {
-          Authorization: `Bearer ${session?.id}`,
+          Authorization: `Bearer ${await getToken()}`,
           "Content-Type": "application/json",
         },
-      }).then((res) => res.json()),
-    enabled: !!session?.id,
+      });
+
+      if (!response.ok) {
+        throw new FetchError(response, "Failed to validate user");
+      }
+
+      return response.json();
+    },
+    retry: false,
   });
 
   return { isLoading, data, error };

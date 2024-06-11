@@ -1,5 +1,7 @@
+import { LoadingIcon } from "@/components/icons/loading.icon.tsx";
 import { ROUTES } from "@/config/routes.ts";
 import { classNames } from "@/lib/utils.ts";
+import { useSession } from "@clerk/clerk-react";
 import {
   Dialog,
   DialogPanel,
@@ -9,7 +11,7 @@ import {
 import { PencilSquareIcon } from "@heroicons/react/16/solid";
 import { Bars3Icon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 
 const navigation = [
   {
@@ -29,10 +31,26 @@ const isCurrentPath = (pathname: string, href: string) =>
   (pathname.startsWith(`${href}/`) && href !== "/dashboard");
 
 export const DashboardLayout = () => {
+  const { isLoaded, isSignedIn } = useSession();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { pathname } = location;
+
+  const getContent = () => {
+    if (!isSignedIn) return <Navigate to={ROUTES.SIGNED_OUT} />;
+    return <Outlet />;
+  };
+
+  if (!isLoaded) {
+    return (
+      <main>
+        <h1 className="inline-flex gap-2 p-4 text-white">
+          Loading <LoadingIcon />
+        </h1>
+      </main>
+    );
+  }
 
   return (
     <div>
@@ -96,8 +114,8 @@ export const DashboardLayout = () => {
                         <ul role="list" className="-mx-2 space-y-1">
                           {navigation.map((item) => (
                             <li key={item.label}>
-                              <a
-                                href={item.href}
+                              <Link
+                                to={item.href}
                                 className={classNames(
                                   isCurrentPath(pathname, item.href)
                                     ? "bg-slate-800 text-white"
@@ -110,7 +128,7 @@ export const DashboardLayout = () => {
                                   aria-hidden="true"
                                 />
                                 {item.label}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -202,9 +220,7 @@ export const DashboardLayout = () => {
       </div>
 
       <main className="py-10 lg:pl-72">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <Outlet />
-        </div>
+        <div className="px-4 sm:px-6 lg:px-8">{getContent()}</div>
       </main>
     </div>
   );
