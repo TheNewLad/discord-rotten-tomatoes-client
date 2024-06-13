@@ -4,6 +4,7 @@ const BASE_PATHS = {
   ERROR: "/errors",
   HOME: "/",
   OAUTH_AUTHORIZE: "/oauth/authorize",
+  SANDBOX: "/sandbox",
   SIGNED_OUT: "/signed-out",
   SIGN_IN: "/sign-in",
 };
@@ -30,6 +31,7 @@ export const ROUTES = {
   ERROR: ERROR_ROUTES,
   HOME: BASE_PATHS.HOME,
   OAUTH_AUTHORIZE: BASE_PATHS.OAUTH_AUTHORIZE,
+  SANDBOX: BASE_PATHS.SANDBOX,
   SIGNED_OUT: BASE_PATHS.SIGNED_OUT,
   SIGN_IN: BASE_PATHS.SIGN_IN,
 };

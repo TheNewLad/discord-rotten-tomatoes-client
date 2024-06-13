@@ -30,4 +30,10 @@ export default [
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
   ),
+  {
+    files: ["src/components/sandbox/**/*.tsx"],
+    rules: {
+      "no-console": ["error", { allow: ["debug"] }],
+    },
+  },
 ];

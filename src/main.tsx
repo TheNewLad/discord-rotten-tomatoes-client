@@ -1,3 +1,4 @@
+import { Sandbox } from "@/components/sandbox";
 import { env } from "@/config/environment.ts";
 import { ROUTES } from "@/config/routes.ts";
 import { DashboardLayout } from "@/layouts/dashboard.layout.tsx";
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.ERROR.NOT_FOUND,
     element: <NotFound404Page />,
+  },
+  {
+    path: ROUTES.SANDBOX,
+    element: <Sandbox />,
   },
   {
     path: "*",
