@@ -1,3 +1,4 @@
+import { ReviewList } from "@/components/elements/review-item/review-list.tsx";
 import { Review } from "@/components/elements/review-item/review.tsx";
 import { reviews } from "@/components/sandbox/mock-data.ts";
 
@@ -7,16 +8,12 @@ export const ReviewItemSandbox = () => {
   return (
     <>
       <div>
-        <h3>Review Item</h3>
+        <h3>A Single Review</h3>
         <Review {...firstReview} />
       </div>
       <div>
-        <h3>Review Items</h3>
-        <div className="grid justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {reviews.map((item) => (
-            <Review key={item.title} {...item} />
-          ))}
-        </div>
+        <h3>Review List</h3>
+        <ReviewList reviews={reviews} />
       </div>
     </>
   );
