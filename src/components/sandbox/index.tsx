@@ -2,6 +2,7 @@
  * For designing and displaying components in isolation
  * */
 import { ButtonSandbox } from "@/components/sandbox/button.sandbox.tsx";
+import { ReviewItemSandbox } from "@/components/sandbox/review-item.sandbox.tsx";
 import { ReactNode } from "react";
 
 export const Sandbox = () => {
@@ -14,9 +15,11 @@ export const Sandbox = () => {
           isolation.
         </p>
       </section>
-      <Section title="Button Sandbox">
       <Section title="Button">
         <ButtonSandbox />
+      </Section>
+      <Section title="Review Item">
+        <ReviewItemSandbox />
       </Section>
     </main>
   );

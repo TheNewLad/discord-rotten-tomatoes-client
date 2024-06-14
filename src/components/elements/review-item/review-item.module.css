@@ -1,0 +1,25 @@
+.container {
+    display: grid;
+    grid-template-columns: 8rem auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 1em 1em;
+    grid-auto-flow: row;
+    align-items: stretch;
+    grid-template-areas:
+    "poster ."
+    "poster title"
+    "poster rating"
+    "poster .";
+}
+
+.poster {
+    grid-area: poster;
+}
+
+.title {
+    grid-area: title;
+}
+
+.rating {
+    grid-area: rating;
+}
