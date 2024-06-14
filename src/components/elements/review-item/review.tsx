@@ -13,6 +13,7 @@ export const Review = ({
         src={imageSrc}
         alt={`${title} poster`}
         className="h-48 w-32 rounded-lg md:row-span-2"
+        loading="lazy"
       />
       <h2 className="text-lg font-semibold md:col-start-2 md:content-end">
         {title}
