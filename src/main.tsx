@@ -1,4 +1,4 @@
-import { Sandbox } from "@/components/sandbox";
+import { Sandbox } from "@/components/sandbox/sandbox.tsx";
 import { env } from "@/config/environment.ts";
 import { ROUTES } from "@/config/routes.ts";
 import { DashboardLayout } from "@/layouts/dashboard.layout.tsx";
