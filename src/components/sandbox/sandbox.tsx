@@ -3,6 +3,7 @@
  * */
 import { ButtonSandbox } from "@/components/sandbox/button.sandbox.tsx";
 import { ReviewItemSandbox } from "@/components/sandbox/review-item.sandbox.tsx";
+import { TypographySandbox } from "@/components/sandbox/typography.sandbox.tsx";
 import { ReactNode } from "react";
 
 export const Sandbox = () => {
@@ -20,6 +21,9 @@ export const Sandbox = () => {
       </Section>
       <Section title="Review Item">
         <ReviewItemSandbox />
+      </Section>
+      <Section title="Typography">
+        <TypographySandbox />
       </Section>
     </main>
   );
