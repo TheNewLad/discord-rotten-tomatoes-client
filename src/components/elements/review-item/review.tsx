@@ -20,7 +20,7 @@ export const Review = ({
       <div className="inline-flex max-h-fit items-baseline gap-1 md:col-start-2">
         <StarIcon className="h-4 w-4 text-yellow-400" />
         <span className="">{rating}</span>
-        <span className="ml-1 text-gray-500">({reviewCount})</span>
+        <span className="ml-1 text-slate-400">({reviewCount})</span>
       </div>
     </div>
   );
