@@ -15,6 +15,7 @@ export const Sandbox = () => {
         </p>
       </section>
       <Section title="Button Sandbox">
+      <Section title="Button">
         <ButtonSandbox />
       </Section>
     </main>
