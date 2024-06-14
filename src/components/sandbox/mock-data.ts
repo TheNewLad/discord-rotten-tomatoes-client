@@ -1,6 +1,6 @@
-import { type ReviewItems as ReviewItemsType } from "@/components/elements/review-item/review-item.types";
+import { type Reviews } from "@/components/elements/review-item/review.types.ts";
 
-export const ReviewItems: ReviewItemsType = [
+export const reviews: Reviews = [
   {
     imageSrc: "https://placeholder.co/200x300?text=Movie+A",
     title: "Movie A: The Sequel to Movie X: The Prequel",

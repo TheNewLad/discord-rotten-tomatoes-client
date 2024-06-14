@@ -1,7 +1,7 @@
-import { type ReviewItem as ReviewItemType } from "@/components/elements/review-item/review-item.types";
+import { type Review as ReviewItemType } from "@/components/elements/review-item/review.types.ts";
 import { StarIcon } from "@heroicons/react/16/solid";
 
-export const ReviewItem = ({
+export const Review = ({
   imageSrc,
   title,
   rating,
