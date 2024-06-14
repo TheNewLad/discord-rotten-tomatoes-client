@@ -4,12 +4,15 @@ import { type Reviews } from "@/components/elements/review-item/review.types.ts"
 interface ReviewListProps {
   reviews: Reviews;
 }
+
 export const ReviewList = ({ reviews }: ReviewListProps) => {
   return (
-    <div className="grid justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <ul className="grid justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {reviews.map((review) => (
-        <Review key={review.title} {...review} />
+        <li key={review.title} className="w-full">
+          <Review {...review} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

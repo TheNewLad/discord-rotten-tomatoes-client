@@ -8,7 +8,7 @@ export const Review = ({
   reviewCount,
 }: ReviewItemType) => {
   return (
-    <div className="grid w-full grid-cols-1 justify-items-center gap-2 text-center align-middle md:grid-cols-2 md:justify-items-start md:text-left">
+    <div className="grid grid-cols-1 justify-items-center gap-2 text-center align-middle md:grid-cols-2 md:justify-items-start md:text-left">
       <img
         src={imageSrc}
         alt={`${title} poster`}
