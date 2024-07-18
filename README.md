@@ -1,30 +1,73 @@
-# React + TypeScript + Vite
+# Discord Rotten Tomatoes Server
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This web application allows users to sign in with Discord to access and rate TV shows and movies for a specific Discord server. This project aims to provide Discord server-specific reviews, search functionality, commenting, and personalized rating weightings.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React, Tailwind CSS
+- **Backend [(Link)](https://github.com/TheNewLad/discord-rotten-tomatoes-server)**: Node.js, Express
+- **Database**: Supabase
+- **Authentication**: Clerk, Discord OAuth
+- **API Integration**: TMDB API for fetching movie details
+- **Testing**: Vitest, React Testing Library
 
-## Expanding the ESLint configuration
+## How to Run the Project
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+Ensure you have the following installed:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- npm
+- Clerk account for authentication
+
+### Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/TheNewLad/discord-rotten-tomatoes-client.git
+   cd discord-rotten-tomatoes-client
+   ```
+
+2. **Install dependencies**
+
+   Using npm:
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+
+   Create a `.env` file in the root directory and add the following:
+
+   ```env
+   VITE_API_URL=api_url
+   VITE_CLERK_PUBLISHABLE_KEY=pk_test_ // this is acquired from Clerk
+   ```
+
+4. **Start the development server**
+
+   Using npm:
+
+   ```bash
+   npm run dev
+   ```
+
+   The app should now be running at `http://localhost:5174`.
+
+### Running Tests
+
+To run the tests, use:
+
+```bash
+npm test
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License.
